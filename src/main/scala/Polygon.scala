@@ -4,7 +4,7 @@ class Polygon(var points: List[Point]) {
   def this(maxSides: Int, width: Int, height: Int) {
     this(List[Point]())
     val r = new scala.util.Random
-    val numSides = 3 + r.nextInt((maxSides-3) + 1)
+    val numSides = 3 + r.nextInt((maxSides - 3) + 1)
 
     val centerX = r.nextInt(width + 1)
     val centerY = r.nextInt(height + 1)
@@ -21,10 +21,10 @@ class Polygon(var points: List[Point]) {
         case v => v
       }
 
-      val straightDist = minDistFromCenter + (r.nextDouble()*(maxDistFromCenter - minDistFromCenter))
+      val straightDist = minDistFromCenter + (r.nextDouble() * (maxDistFromCenter - minDistFromCenter))
       val angle = angleStep * i
-      val finalX = bindNumber(((straightDist*Math.cos(angle)) + centerX).toInt, width)
-      val finalY = bindNumber(((straightDist*Math.sin(angle)) + centerY).toInt, height)
+      val finalX = bindNumber(((straightDist * Math.cos(angle)) + centerX).toInt, width)
+      val finalY = bindNumber(((straightDist * Math.sin(angle)) + centerY).toInt, height)
 
       new Point(finalX, finalY)
     }
@@ -42,25 +42,28 @@ class Polygon(var points: List[Point]) {
         (point.x < (points(j).x - points(i).x) * (point.y - points(i).y) / (points(j).y - points(i).y) + points(i).x)) {
         result = !result
       }
-      j = { i += 1; i - 1 }
+      j = {
+        i += 1; i - 1
+      }
     }
 
     result
   }
 
+  // Returns true if the line created between start and end intersects the polygon
   def lineIntersects(start: Point, end: Point): Boolean = {
     val possiblePath = new lineeq(start, end)
     var intersectingVerticies = List[Int]()
 
     points.indices foreach { i =>
       val firstPoint = points(i)
-      val secondPoint = if (i == points.size - 1) points.head else points(i+1)
+      val secondPoint = if (i == points.size - 1) points.head else points(i + 1)
       val polygonSide = new lineeq(firstPoint, secondPoint)
 
       if (!GridUtility.isParallel(possiblePath, polygonSide)) {
         val intersectionPoint = GridUtility.interPoint(possiblePath, polygonSide)
         if (GridUtility.isValid(firstPoint, secondPoint, intersectionPoint)) {
-          if(points.contains(intersectionPoint)) {
+          if (points.contains(intersectionPoint)) {
             intersectingVerticies = intersectingVerticies.::(i)
           }
         }
@@ -82,5 +85,6 @@ class Polygon(var points: List[Point]) {
 
     false
   }
+
 
 }
