@@ -1,0 +1,5 @@
+class GreedySearch extends App{
+
+  
+
+}
