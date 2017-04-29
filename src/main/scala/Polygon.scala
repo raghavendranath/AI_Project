@@ -49,36 +49,38 @@ class Polygon(var points: List[Point]) {
   }
 
   def lineIntersects(start: Point, end: Point): Boolean = {
+    val possiblePath = new lineeq(start, end)
+    var intersectingVerticies = List[Int]()
+
     points.indices foreach { i =>
       val firstPoint = points(i)
       val secondPoint = if (i == points.size - 1) points.head else points(i+1)
+      val polygonSide = new lineeq(firstPoint, secondPoint)
 
-      if (lineIntersects(start, end, firstPoint, secondPoint)) {
+      if (!GridUtility.isParallel(possiblePath, polygonSide)) {
+        val intersectionPoint = GridUtility.interPoint(possiblePath, polygonSide)
+        if (GridUtility.isValid(firstPoint, secondPoint, intersectionPoint)) {
+          if(points.contains(intersectionPoint)) {
+            intersectingVerticies = intersectingVerticies.::(i)
+          }
+        }
+      }
+    }
+
+    val distinctVerticies = intersectingVerticies.distinct
+    if (distinctVerticies.isEmpty || distinctVerticies.size == 1) {
+      return false
+    }
+
+    var expectedVertex = distinctVerticies.head
+    distinctVerticies.foreach { value =>
+      if (expectedVertex != value) {
         return true
       }
+      expectedVertex = if (distinctVerticies.size == value) 1 else value + 1
     }
 
     false
   }
 
-  private def lineIntersects(start1: Point, end1: Point, start2: Point, end2: Point): Boolean = {
-    val denom:Double = ((end1.x - start1.x) * (end2.y - start2.y)) - ((end1.y - start1.y) * (end2.x - start2.x))
-    // Parallel lines
-    if (denom == 0) return false
-
-    val numer:Double = ((start1.y - start2.y) * end2.x - start2.x) - ((start1.x - start2.x) * end2.y - start2.y)
-
-    val r:Double = numer / denom
-
-    val numer2:Double = ((start1.y - start2.y) * (end1.x - start1.x)) - ((start1.x - start2.x) * (end1.y - start1.y))
-
-    val s:Double = numer2 / denom
-
-    if ((r < 0 || r > 1) || (s < 0 || s > 1)) return false
-
-    val result = new Point((start1.x + (r * (end1.x - start1.x))).toInt, (start1.y + (r * (end1.y - start1.y))).toInt)
-    if (result == start1 || result == end1) return false
-
-    true
-  }
 }

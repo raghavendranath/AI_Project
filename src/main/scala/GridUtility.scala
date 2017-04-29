@@ -1,19 +1,12 @@
 sealed abstract class Eq
-case class lineeq(xcoeff: Double, ycoeff: Double, c: Double) extends Eq  
+case class lineeq(xcoeff: Double, ycoeff: Double, c: Double) extends Eq {
+  // Returns a new lineeq from two points
+  def this(p1: Point, p2: Point) = this(p2.y - p1.y, -(p2.x - p1.x), p1.x * (p2.x - p1.y) - p1.y * (p2.x - p1.x))
+}
 object GridUtility {
   def distance(p1: Point, p2: Point): Double = {
     val x = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2))
-    println(x)
     x
-  }
-
-  // Creates a line equation from two points
-  def lineEq(p1: Point, p2: Point): lineeq = {
-    val xcor = p2.y - p1.y
-    val ycor = -(p2.x - p1.x)
-    val cons = p1.x * (p2.x - p1.y) - p1.y * (p2.x - p1.x)
-
-    lineeq(xcor,ycor,cons)
   }
 
   // Checks to see if a line is parallel to another
