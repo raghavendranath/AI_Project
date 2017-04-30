@@ -1,49 +1,57 @@
 sealed abstract class Eq
-case class lineeq(xcoeff: Double, ycoeff: Double, c: Double) extends Eq {
-  // Returns a new lineeq from two points
-  def this(p1: Point, p2: Point) = this(p2.y - p1.y, -(p2.x - p1.x), p1.x * (p2.x - p1.y) - p1.y * (p2.x - p1.x))
+case class Line(var m: Double, var b: Double) extends Eq {
+  // Returns a new Line from two Points
+  def this(p1: Point, p2: Point) = {
+    this(Double.PositiveInfinity, p1.x)
+    if (p2.x - p1.x != 0) {
+      m = (p2.y - p1.y) / (p2.x - p1.x)
+      b = p1.y - (m * p1.x)
+    }
+  }
 }
+
 object GridUtility {
   def distance(p1: Point, p2: Point): Double = {
     val x = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2))
     x
   }
 
-  // Checks to see if a line is parallel to another
-  def isParallel(l1: lineeq, l2: lineeq): Boolean ={
-    val x = l2.ycoeff * l1.xcoeff
-    val y = l2.xcoeff * l1.ycoeff
+  // Returns the point where the two lines intersect
+  def intersectionPoint(l1: Line, l2: Line): Point = {
+    if (l1.m == Double.PositiveInfinity) return new Point(l1.b, (l2.m*l1.b)+ l2.b)
+    if (l2.m == Double.PositiveInfinity) return new Point(l2.b, (l1.m*l2.b)+ l1.b)
 
-    x == y
+    val x = (l2.b-l1.b) / (l1.m-l2.m)
+    val y = l1.m * x + l1.b
+
+    new Point(x,y)
   }
 
-  // Returns the point in which the two lines intersect
-  // Note: Call isParallel to make sure that the lines intersect first
-  def interPoint(l1: lineeq, l2: lineeq): Point = {
-    val x = l2.ycoeff * l1.c - l1.ycoeff * l2.c
-    val y = l1.xcoeff * l2.c - l2.xcoeff * l1.c
-    val div = l2.ycoeff * l1.xcoeff - l2.xcoeff * l1.ycoeff
-    val xcor = x / div
-    val ycor = y / div
-
-    new Point(xcor.toInt, ycor.toInt)
+  // Checks if the two lines are parallel
+  def isParallel(l1: Line, l2: Line): Boolean = {
+    l1.m == l2.m
   }
 
   //to check if it is present one the side of a polygon
   //(side: a,b and intersection x) -> (ax+xb = ab)
-  def isValid(p1: Point, p2: Point,p3: Point): Boolean ={
+  def isValid(p1: Point, p2: Point,p3: Point): Boolean = {
     val x = distance(p1, p3)
     val y = distance(p2, p3)
     val z = distance(p1, p2)
 
-    (x + y) == z
+    // Round the points to ensure that rounding doesn't become an issue
+    val lhs = BigDecimal(x + y).setScale(5, BigDecimal.RoundingMode.HALF_UP).toDouble
+    val rhs = BigDecimal(z).setScale(5, BigDecimal.RoundingMode.HALF_UP).toDouble
+    lhs == rhs
   }
-  
-  def main(args: Array[String]) = {
-    val p1:Point = new Point(14, 9)
-    val p2:Point = new Point(13, 5)
-    val dist:Double = GridUtility.distance(p1, p2)
+
+  // Generates a grid with n polygons with 3..7 sides with a start point of (0,0) and a specified goal state
+  def randomGrid(numPolygons: Int, goalState: Point): Grid = {
+    val polygons = 1 to numPolygons map { i =>
+      new Polygon(7, goalState.x.toInt, goalState.y.toInt)
+    }
+
+    new Grid(polygons.toList, new Point(0,0), goalState)
   }
 }
-
 

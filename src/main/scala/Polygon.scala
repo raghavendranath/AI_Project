@@ -52,39 +52,55 @@ class Polygon(var points: List[Point]) {
 
   // Returns true if the line created between start and end intersects the polygon
   def lineIntersects(start: Point, end: Point): Boolean = {
-    val possiblePath = new lineeq(start, end)
-    var intersectingVerticies = List[Int]()
+    val possiblePath = new Line(start, end)
+    var intersectingVertices = List[Int]()
 
     points.indices foreach { i =>
       val firstPoint = points(i)
       val secondPoint = if (i == points.size - 1) points.head else points(i + 1)
-      val polygonSide = new lineeq(firstPoint, secondPoint)
+      val polygonSide = new Line(firstPoint, secondPoint)
 
       if (!GridUtility.isParallel(possiblePath, polygonSide)) {
-        val intersectionPoint = GridUtility.interPoint(possiblePath, polygonSide)
-        if (GridUtility.isValid(firstPoint, secondPoint, intersectionPoint)) {
-          if (points.contains(intersectionPoint)) {
-            intersectingVerticies = intersectingVerticies.::(i)
+        val intersectionPoint = GridUtility.intersectionPoint(possiblePath, polygonSide)
+        if (GridUtility.isValid(firstPoint, secondPoint, intersectionPoint) && GridUtility.isValid(start, end, intersectionPoint)) {
+          if (firstPoint == intersectionPoint) {
+            intersectingVertices = intersectingVertices.::(i)
+          } else if(!points.contains(intersectionPoint)) {
+            // This intersectionPoint is not anywhere on the polygon, which means we definitely crossed a line
+            return true
           }
         }
+      } else if(possiblePath.b == polygonSide.b) {
+        intersectingVertices = intersectingVertices.::(i)
       }
     }
 
-    val distinctVerticies = intersectingVerticies.distinct
-    if (distinctVerticies.isEmpty || distinctVerticies.size == 1) {
+    val distinctVertices = intersectingVertices.distinct.sorted
+    if (distinctVertices.isEmpty || distinctVertices.size == 1) {
       return false
     }
 
-    var expectedVertex = distinctVerticies.head
-    distinctVerticies.foreach { value =>
+    // Ensures that if we are traveling along the edge of a polygon that
+    // we only cross vertices that are neighbors
+    var expectedVertex = distinctVertices.head
+    distinctVertices.foreach { value =>
       if (expectedVertex != value) {
         return true
       }
-      expectedVertex = if (distinctVerticies.size == value) 1 else value + 1
+      expectedVertex = if (distinctVertices.size == value) 1 else value + 1
     }
 
     false
   }
 
-
+  // Outputs the coordinates for matlab
+  def toMatlab: String = {
+    val xString = points.foldLeft("[") { (s: String, point: Point) =>
+      s + point.x.toInt +" "
+    }
+    val yString = points.foldLeft("[") { (s: String, point: Point) =>
+      s + point.y.toInt +" "
+    }
+    xString+"], "+ yString+"], 'r'"
+  }
 }
