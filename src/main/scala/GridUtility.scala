@@ -53,5 +53,6 @@ object GridUtility {
 
     new Grid(polygons.toList, new Point(0,0), goalState)
   }
+
 }
 

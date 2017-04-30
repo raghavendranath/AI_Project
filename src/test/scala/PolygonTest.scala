@@ -31,7 +31,7 @@ class PolygonTest extends FlatSpec {
     assert(tempPoly.lineIntersects(new Point(0,0), new Point(5,5)))
   }
 
-  // Found a new edge case... currently failing
+   //Found a new edge case... currently failing
   "a line" should "be able to travel along two vertices on a concave polygon" in {
     val tempPoly = new Polygon(List(new Point(1,1), new Point(2,1), new Point(2,2), new Point(3,2), new Point(3,0), new Point(1,0)))
     assert(!tempPoly.lineIntersects(new Point(0,0), new Point(5,5)))
