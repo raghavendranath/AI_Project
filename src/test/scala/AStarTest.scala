@@ -199,7 +199,7 @@ class AStarTest extends FunSpec{
       new Point(550,400), new Point(900,900))
 
     val path = AStar.search(grid)
-    val expectedPath = List(new Point(100,100), new Point(186,76), new Point(348,57), new Point(368,58), new Point(356,95), new Point(420,114), new Point(448,149), new Point(434,455), new Point(446,511), new Point(549,681), new Point(649,742), new Point(795,619), new Point(731,551), new Point(700,520))
+    val expectedPath = List(new Point(550.0,400.0), new Point(549.0,365.0), new Point(533.0,193.0), new Point(593.0,52.0), new Point(703.0,9.0), new Point(749.0,29.0), new Point(776.0,844.0), new Point(793.0,887.0), new Point(837.0,977.0), new Point(900.0,900.0))
     assert(path == expectedPath)
   }
 }
