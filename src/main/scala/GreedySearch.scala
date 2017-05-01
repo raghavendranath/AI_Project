@@ -1,17 +1,50 @@
-object GreedySearch extends App{
+import scala.collection.mutable
+import scala.collection.mutable.ArrayBuffer
+import scala.math.Ordering.Implicits._
 
+object GreedySearch {
+  def main(args: Array[String]): Unit = {
+    var polygons = GridUtility.randomGrid(5, new Point(20, 20))
+    print(polygons.getAllPoints())
+    val empty = new Point(999,999)
+    val start = new Point(0,0)
 
-  def testGrid1(): Grid = {
-    val polygons = List(new Polygon(List(new Point(1,1), new Point(2,1), new Point(2,2), new Point(1,2))))
-    new Grid(polygons, new Point(0,0), new Point(5, 5))
-  }
+    //change the goal for other cases
+    val goal = new Point(7,2)
+    var open = new mutable.PriorityQueue[(Point, Point, Double)]()( Ordering.by((_: (Point, Point, Double))._3).reverse)
+    var closed = new ArrayBuffer[(Point, Point, Double)]()
+    // to keep track of open list
+    var tracking = new ArrayBuffer[(Point, Point, Double)]()
 
-  def testGrid2(): Grid = {
-    val polygons = List(
-      new Polygon(List(new Point(14, 15), new Point(12, 13), new Point(14, 9), new Point(15, 13))),
-      new Polygon(List(new Point(6, 12), new Point(2, 11), new Point(6, 9), new Point(7, 11))),
-      new Polygon(List(new Point(13, 6), new Point(11, 6), new Point(13, 4)))
-    )
-    new Grid(polygons, new Point(0,0), new Point(20, 20))
+    //Adding start point to open
+    open += ((start, empty, GridUtility.distance(start,goal)))
+    tracking.append((start, empty, GridUtility.distance(start,goal)))
+    while(true) {
+      if(open.isEmpty){
+        println("Failed to search")
+        return
+      }
+      var current = open.dequeue()
+      tracking.filter(_ != current)
+      closed.append(current)
+      if(current._1 == goal){
+        println("Success: Goal Found")
+        return
+      }
+      //expanding the node
+      var successors = polygons.getNeighbors(current._1)
+      var neighbors = new ArrayBuffer[(Point, Point, Double)]()
+      for(successor <- successors){
+        neighbors.append((successor, current._1, GridUtility.distance(successor,goal)))
+      }
+      for(neighbor <- neighbors){
+        if(!(tracking.contains(neighbor) ||closed.contains(neighbor))){
+          open += neighbor
+          tracking.append(neighbor)
+        }
+      }
+    }
+    closed.foreach(println)
+
   }
 }
