@@ -24,7 +24,7 @@ object GreedySearch {
       tracking.filter(_ != current)
       closed.append(current)
       if(current.current == goal && !grid.isInAPolygon(goal)){
-        return toList(closed)
+        return GreedySearchNode.filter(closed)
       }
       //expanding the node
       val successors = grid.getNeighbors(current.current)
@@ -40,28 +40,29 @@ object GreedySearch {
       }
     }
 
-    toList(closed)
-  }
-
-  private def toList(l: ArrayBuffer[GreedySearchNode]): List[Point] = {
-    if (l.isEmpty) return List[Point]()
-
-    var points = List[Point]()
-
-    1 until l.length foreach { i =>
-      val previousPoint = l(i-1)
-      val currentPoint = l(i)
-      if (previousPoint.current == currentPoint.previous) {
-        points = points :+ previousPoint.current
-      }
-    }
-
-    points :+ l.last.current
+    GreedySearchNode.filter(closed)
   }
 }
 
 case class GreedySearchNode(var current: Point, var previous: Point, var h: Double) extends Ordered[GreedySearchNode] {
   override def compare(that: GreedySearchNode): Int = {
     (this.h compare that.h) * -1
+  }
+}
+object GreedySearchNode {
+  def filter(points: ArrayBuffer[GreedySearchNode]): List[Point] = {
+    if (points.isEmpty) return List[Point]()
+
+    var finalPoints = List[Point]()
+    var expectedPoint = points.last.current
+    points.length - 1 to 0 by -1 foreach { i =>
+      val currentPoint = points(i)
+      if (currentPoint.current == expectedPoint) {
+        finalPoints = finalPoints :+ currentPoint.current
+        expectedPoint = currentPoint.previous
+      }
+    }
+
+    finalPoints.reverse
   }
 }

@@ -28,19 +28,19 @@ object AStar {
       tracking.filter(_ != current)
       closed.append(current)
       if(current.current == goal && !grid.isInAPolygon(goal)){
-        return toList(closed)
+        return AStarNode.filter(closed)
       }
       //expanding the node
       val successors = grid.getNeighbors(current.current)
       val neighbors = new ArrayBuffer[AStarNode]()
       for(successor <- successors){
-        val g = GridUtility.distance(current.current, successor)
+        val g = current.g+ GridUtility.distance(current.current, successor)
         val h = GridUtility.distance(successor, goal)
         val f = g + h
         neighbors.append(AStarNode(successor, current.current, g, h, f))
       }
       for(neighbor <- neighbors){
-        if(!(tracking.contains(neighbor) ||closed.contains(neighbor))){
+        if(!(tracking.contains(neighbor) || closed.contains(neighbor))){
           open += neighbor
           tracking.append(neighbor)
         }
@@ -59,28 +59,34 @@ object AStar {
       }
     }
 
-    toList(closed)
-  }
-
-  private def toList(l: ArrayBuffer[AStarNode]): List[Point] = {
-    if (l.isEmpty) return List[Point]()
-
-    var points = List[Point]()
-
-    1 until l.length foreach { i =>
-      val previousPoint = l(i-1)
-      val currentPoint = l(i)
-      if (previousPoint.current == currentPoint.previous) {
-        points = points :+ previousPoint.current
-      }
-    }
-
-    points :+ l.last.current
+    AStarNode.filter(closed)
   }
 }
 
 case class AStarNode(var current: Point, var previous: Point, var g: Double, var h: Double, var f: Double) extends Ordered[AStarNode] {
   override def compare(that: AStarNode): Int = {
     (this.f compare that.f) * -1
+  }
+
+  override def equals(obj: scala.Any): Boolean = obj match {
+    case that: AStarNode => this.current == that.current
+    case _ => false
+  }
+}
+object AStarNode {
+  def filter(points: ArrayBuffer[AStarNode]): List[Point] = {
+    if (points.isEmpty) return List[Point]()
+
+    var finalPoints = List[Point]()
+    var expectedPoint = points.last.current
+    points.length - 1 to 0 by -1 foreach { i =>
+      val currentPoint = points(i)
+      if (currentPoint.current == expectedPoint) {
+        finalPoints = finalPoints :+ currentPoint.current
+        expectedPoint = currentPoint.previous
+      }
+    }
+
+    finalPoints.reverse
   }
 }
