@@ -8,14 +8,14 @@ object GreedySearch {
 
     //change the goal for other cases
     val goal = grid.getGoal
-    var open = new mutable.PriorityQueue[(Point, Point, Double)]()( Ordering.by((_: (Point, Point, Double))._3).reverse)
-    var closed = new ArrayBuffer[(Point, Point, Double)]()
+    var open = new mutable.PriorityQueue[GreedySearchNode]()(Ordering[GreedySearchNode])
+    var closed = new ArrayBuffer[GreedySearchNode]()
     // to keep track of open list
-    val tracking = new ArrayBuffer[(Point, Point, Double)]()
+    val tracking = new ArrayBuffer[GreedySearchNode]()
 
     //Adding start point to open
-    open += ((start, empty, GridUtility.distance(start,goal)))
-    tracking.append((start, empty, GridUtility.distance(start,goal)))
+    open += GreedySearchNode(start, empty, GridUtility.distance(start, goal))
+    tracking.append(GreedySearchNode(start, empty, GridUtility.distance(start,goal)))
     while(true) {
       if(open.isEmpty){
         return List()
@@ -23,14 +23,14 @@ object GreedySearch {
       val current = open.dequeue()
       tracking.filter(_ != current)
       closed.append(current)
-      if(current._1 == goal && !grid.isInAPolygon(goal)){
+      if(current.current == goal && !grid.isInAPolygon(goal)){
         return toList(closed)
       }
       //expanding the node
-      val successors = grid.getNeighbors(current._1)
-      val neighbors = new ArrayBuffer[(Point, Point, Double)]()
+      val successors = grid.getNeighbors(current.current)
+      val neighbors = new ArrayBuffer[GreedySearchNode]()
       for(successor <- successors){
-        neighbors.append((successor, current._1, GridUtility.distance(successor,goal)))
+        neighbors.append(GreedySearchNode(successor, current.current, GridUtility.distance(successor,goal)))
       }
       for(neighbor <- neighbors){
         if(!(tracking.contains(neighbor) ||closed.contains(neighbor))){
@@ -43,7 +43,7 @@ object GreedySearch {
     toList(closed)
   }
 
-  private def toList(l: ArrayBuffer[(Point, Point, Double)]): List[Point] = {
+  private def toList(l: ArrayBuffer[GreedySearchNode]): List[Point] = {
     if (l.isEmpty) return List[Point]()
 
     var points = List[Point]()
@@ -51,11 +51,17 @@ object GreedySearch {
     1 until l.length foreach { i =>
       val previousPoint = l(i-1)
       val currentPoint = l(i)
-      if (previousPoint._1 == currentPoint._2) {
-        points = points :+ previousPoint._1
+      if (previousPoint.current == currentPoint.previous) {
+        points = points :+ previousPoint.current
       }
     }
 
-    points :+ l.last._1
+    points :+ l.last.current
+  }
+}
+
+case class GreedySearchNode(var current: Point, var previous: Point, var h: Double) extends Ordered[GreedySearchNode] {
+  override def compare(that: GreedySearchNode): Int = {
+    (this.h compare that.h) * -1
   }
 }
