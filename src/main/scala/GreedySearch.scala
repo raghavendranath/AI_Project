@@ -17,6 +17,7 @@ object GreedySearch {
     var tracking = new ArrayBuffer[(Point, Point, Double)]()
 
     //Adding start point to open
+    // A cool new comment
     open += ((start, empty, GridUtility.distance(start,goal)))
     tracking.append((start, empty, GridUtility.distance(start,goal)))
     while(true) {
