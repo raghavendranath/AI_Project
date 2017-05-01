@@ -44,8 +44,18 @@ object GreedySearch {
   }
 
   private def toList(l: ArrayBuffer[(Point, Point, Double)]): List[Point] = {
-    l.toList.map { t =>
-      t._1
+    if (l.isEmpty) return List[Point]()
+
+    var points = List[Point]()
+
+    1 until l.length foreach { i =>
+      val previousPoint = l(i-1)
+      val currentPoint = l(i)
+      if (previousPoint._1 == currentPoint._2) {
+        points = points :+ previousPoint._1
+      }
     }
+
+    points :+ l.last._1
   }
 }

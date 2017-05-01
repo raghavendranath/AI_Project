@@ -42,7 +42,7 @@ class GreedySearchTest extends FunSpec{
     assert(path == expectedPath)
   }
 
-  registerTest("Moderate greedy search") {
+  registerTest("Moderate greedy search (Backtracking)") {
     val grid = new Grid(List(
       new Polygon(List(new Point(8,14),new Point(5,10),new Point(8,9),new Point(9,10))),
       new Polygon(List(new Point(16,16),new Point(14,15),new Point(13,15),new Point(12,13),new Point(14,13),new Point(17,12),new Point(18,15))),
@@ -51,8 +51,11 @@ class GreedySearchTest extends FunSpec{
       new Polygon(List(new Point(19,11),new Point(16,12),new Point(17,8),new Point(20,5),new Point(20,9)))
     ), new Point(0,0), new Point(20,20))
 
+    println(grid.toMatlab)
     val path = GreedySearch.search(grid)
-    val expectedPath = List(new Point(0,0), new Point(15,10), new Point(12,12), new Point(11,15), new Point(15,18), new Point(20,20))
+    println(GridUtility.toMatlab(path))
+
+    val expectedPath = List(new Point(0,0), new Point(12,12), new Point(11,15), new Point(15,18), new Point(20,20))
     assert(path == expectedPath)
   }
 
@@ -66,9 +69,16 @@ class GreedySearchTest extends FunSpec{
 
   registerTest("Moderate greedy search 3") {
     val grid = new Grid(List(new Polygon(List(new Point(3,15),new Point(0,14),new Point(0,11),new Point(0,9),new Point(2,8),new Point(1,11))),new Polygon(List(new Point(17,8),new Point(16,5),new Point(20,7))),new Polygon(List(new Point(6,13),new Point(1,9),new Point(5,5),new Point(8,9))),new Polygon(List(new Point(13,5),new Point(14,3),new Point(19,3))),new Polygon(List(new Point(17,6),new Point(14,4),new Point(13,3),new Point(14,2),new Point(14,0),new Point(15,2),new Point(19,2))),new Polygon(List(new Point(11,13),new Point(10,13),new Point(8,13),new Point(8,9),new Point(12,9),new Point(14,13))),new Polygon(List(new Point(9,11),new Point(5,10),new Point(8,5),new Point(10,10))),new Polygon(List(new Point(19,9),new Point(17,9),new Point(14,9),new Point(13,5),new Point(17,5),new Point(20,4),new Point(20,7))),new Polygon(List(new Point(4,4),new Point(1,0),new Point(3,0),new Point(7,0))),new Polygon(List(new Point(9,16),new Point(10,9),new Point(16,12)))), new Point(0,0), new Point(20,20))
+    val path = GreedySearch.search(grid)
+    val expectedPath = List(new Point(0.0,0.0), new Point(0.0,14.0), new Point(3.0,15.0), new Point(20.0,20.0))
+    assert(path == expectedPath)
+  }
+
+  registerTest("Moderate greedy search 4 (Backtracking)") {
+    val grid = new Grid(List(new Polygon(List(new Point(11.0,4.0),new Point(8.0,4.0),new Point(6.0,3.0),new Point(6.0,0.0),new Point(8.0,0.0),new Point(10.0,0.0),new Point(11.0,1.0))),new Polygon(List(new Point(11.0,11.0),new Point(8.0,9.0),new Point(5.0,10.0),new Point(4.0,6.0),new Point(8.0,8.0),new Point(11.0,6.0),new Point(11.0,9.0))),new Polygon(List(new Point(17.0,6.0),new Point(15.0,5.0),new Point(17.0,1.0),new Point(17.0,5.0))),new Polygon(List(new Point(18.0,16.0),new Point(16.0,11.0),new Point(20.0,15.0))),new Polygon(List(new Point(9.0,20.0),new Point(6.0,20.0),new Point(5.0,16.0),new Point(9.0,17.0),new Point(12.0,19.0))),new Polygon(List(new Point(6.0,15.0),new Point(1.0,14.0),new Point(6.0,11.0),new Point(7.0,14.0))),new Polygon(List(new Point(10.0,14.0),new Point(6.0,13.0),new Point(10.0,11.0),new Point(10.0,13.0))),new Polygon(List(new Point(11.0,18.0),new Point(9.0,19.0),new Point(7.0,17.0),new Point(8.0,15.0),new Point(9.0,14.0),new Point(10.0,14.0),new Point(12.0,16.0))),new Polygon(List(new Point(4.0,18.0),new Point(0.0,17.0),new Point(3.0,15.0),new Point(4.0,17.0))),new Polygon(List(new Point(11.0,7.0),new Point(7.0,7.0),new Point(6.0,2.0),new Point(12.0,0.0),new Point(12.0,5.0)))), new Point(0.0,0.0), new Point(20.0,20.0))
 
     val path = GreedySearch.search(grid)
-    val expectedPath = List(new Point(0,0), new Point(10,0), new Point(14,4), new Point(20,20))
+    val expectedPath = List(new Point(0.0,0.0), new Point(5.0,10.0), new Point(11.0,11.0), new Point(20.0,20.0))
     assert(path == expectedPath)
   }
 }
