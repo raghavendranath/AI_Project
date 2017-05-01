@@ -6,6 +6,12 @@ object Main {
 
     demoGrids.foreach { grid =>
       println(grid.toMatlab)
+      val neighbors = grid.getNeighbors(new Point(0,0))
+      println(GridUtility.toMatlab(neighbors))
+      println()
+      println(s"val grid = $grid")
+      println("val expectedNeighbors = "+ GridUtility.createPointList(neighbors))
+      println()
       println()
     }
   }

@@ -15,7 +15,7 @@ class Grid(polygons: List[Polygon], startPoint: Point, goalPoint: Point) {
 
   // Gets the neighbors of the start point
   def getNeighbors(startPoint: Point): List[Point] = {
-    getAllPoints().filter { point => canTravelFrom(startPoint, point) && startPoint != point }
+    getAllPoints().filter { point => startPoint != point && canTravelFrom(startPoint, point) }
   }
 
   // Outputs the code that will plot the grid in matlab
@@ -24,6 +24,10 @@ class Grid(polygons: List[Polygon], startPoint: Point, goalPoint: Point) {
       s + polygon.toMatlab +","
     }
 
-    s.substring(0, s.length - 1) +")\nxlim([0 "+ goalPoint.x +"])\nylim([0 "+ goalPoint.y +"])"
+    s.substring(0, s.length - 1) +");xlim([0 "+ goalPoint.x +"]);ylim([0 "+ goalPoint.y +"]);hold on;"
+  }
+
+  override def toString: String = {
+    polygons.mkString("new Grid(List(", ",", s"), $startPoint, $goalPoint)")
   }
 }

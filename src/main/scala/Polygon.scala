@@ -60,34 +60,36 @@ class Polygon(var points: List[Point]) {
       val secondPoint = if (i == points.size - 1) points.head else points(i + 1)
       val polygonSide = new Line(firstPoint, secondPoint)
 
-      if (!GridUtility.isParallel(possiblePath, polygonSide)) {
-        val intersectionPoint = GridUtility.intersectionPoint(possiblePath, polygonSide)
-        if (GridUtility.isValid(firstPoint, secondPoint, intersectionPoint) && GridUtility.isValid(start, end, intersectionPoint)) {
-          if (firstPoint == intersectionPoint) {
-            intersectingVertices = intersectingVertices.::(i)
-          } else if(!points.contains(intersectionPoint)) {
-            // This intersectionPoint is not anywhere on the polygon, which means we definitely crossed a line
-            return true
-          }
+      val intersectingPoint = possiblePath.intersectsWith(polygonSide)
+      if (intersectingPoint == null) {
+        // the lines never intersect, we can move on without doing anything
+      } else {
+        // lines intersected at a point within the two lines
+        if (intersectingPoint != firstPoint && intersectingPoint != secondPoint) {
+          // Intersected in the middle of the polygon side, definitely intersected with polygon
+          return true
+        } else {
+          // Intersected a vertex, which could be okay
+          intersectingVertices = points.indexOf(intersectingPoint) :: intersectingVertices
         }
-      } else if(possiblePath.b == polygonSide.b) {
-        intersectingVertices = intersectingVertices.::(i)
       }
     }
 
     val distinctVertices = intersectingVertices.distinct.sorted
-    if (distinctVertices.isEmpty || distinctVertices.size == 1) {
-      return false
-    }
+    // Passing through just one vertex is okay
+    if (distinctVertices.isEmpty || distinctVertices.length == 1) return false
 
-    // Ensures that if we are traveling along the edge of a polygon that
-    // we only cross vertices that are neighbors
-    var expectedVertex = distinctVertices.head
-    distinctVertices.foreach { value =>
-      if (expectedVertex != value) {
+    0 to distinctVertices.length - 2 foreach { i =>
+      val vertex = points(distinctVertices(i))
+      val nextVertex = points(distinctVertices(i+1)) // Okay since the loop is length - 2
+    val midpoint = new Point((vertex.x + nextVertex.x)/2, (vertex.y + nextVertex.y)/2)
+      val indexDiff = Math.abs(distinctVertices(i) - distinctVertices(i+1))
+      val adjacentVerticies = indexDiff != 1 && indexDiff != points.length - 1
+      if (contains(midpoint) && adjacentVerticies) {
+        // Polygon contains the midpoint between two vertices, and the two vertices are adjacent
+        // means the line intersects the polygon
         return true
       }
-      expectedVertex = if (distinctVertices.size == value) 1 else value + 1
     }
 
     false
@@ -103,4 +105,6 @@ class Polygon(var points: List[Point]) {
     }
     xString+"], "+ yString+"], 'r'"
   }
+
+  override def toString: String = points.mkString("new Polygon(List(", ",","))")
 }

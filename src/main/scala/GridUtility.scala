@@ -1,15 +1,3 @@
-sealed abstract class Eq
-case class Line(var m: Double, var b: Double) extends Eq {
-  // Returns a new Line from two Points
-  def this(p1: Point, p2: Point) = {
-    this(Double.PositiveInfinity, p1.x)
-    if (p2.x - p1.x != 0) {
-      m = (p2.y - p1.y) / (p2.x - p1.x)
-      b = p1.y - (m * p1.x)
-    }
-  }
-}
-
 object GridUtility {
   def distance(p1: Point, p2: Point): Double = {
     val x = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2))
@@ -52,6 +40,20 @@ object GridUtility {
     }
 
     new Grid(polygons.toList, new Point(0,0), goalState)
+  }
+
+  def toMatlab(points: List[Point]): String = {
+    var result = points.foldLeft("scatter([") { (s, point) =>
+      s + point.x.toInt +" "
+    }
+    result = points.foldLeft(result +"], [") { (s, point) =>
+      s + point.y.toInt +" "
+    }
+    result +"], 'filled')"
+  }
+
+  def createPointList(points: List[Point]): String = {
+    points.mkString("List(", ",", ")")
   }
 }
 
