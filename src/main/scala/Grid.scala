@@ -5,8 +5,13 @@ class Grid(polygons: List[Polygon], startPoint: Point, goalPoint: Point) {
       if (polygon.lineIntersects(start, to)) return false
     }
 
+    if (isInAPolygon(to)) return false
+
     true
   }
+
+  def getStart: Point = startPoint
+  def getGoal: Point = goalPoint
 
   // Returns all points that are on the grid
   def getAllPoints(): List[Point] = {
@@ -25,6 +30,15 @@ class Grid(polygons: List[Polygon], startPoint: Point, goalPoint: Point) {
     }
 
     s.substring(0, s.length - 1) +");xlim([0 "+ goalPoint.x +"]);ylim([0 "+ goalPoint.y +"]);hold on;"
+  }
+
+  // Checks all polygons to make sure that the point is not in the polygon, but it is okay if it is a vertex
+  def isInAPolygon(point: Point): Boolean = {
+    polygons.foreach { polygon =>
+      if (polygon.contains(point) && !polygon.points.contains(point)) return true
+    }
+
+    false
   }
 
   override def toString: String = {

@@ -1,40 +1,34 @@
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
-import scala.math.Ordering.Implicits._
 
 object GreedySearch {
-  def main(args: Array[String]): Unit = {
-    var polygons = GridUtility.randomGrid(5, new Point(20, 20))
-    print(polygons.getAllPoints())
-    val empty = new Point(999,999)
-    val start = new Point(0,0)
+  def search(grid: Grid): List[Point] = {
+    val empty = new Point(Double.PositiveInfinity,Double.PositiveInfinity)
+    val start = grid.getStart
 
     //change the goal for other cases
-    val goal = new Point(7,2)
+    val goal = grid.getGoal
     var open = new mutable.PriorityQueue[(Point, Point, Double)]()( Ordering.by((_: (Point, Point, Double))._3).reverse)
     var closed = new ArrayBuffer[(Point, Point, Double)]()
     // to keep track of open list
-    var tracking = new ArrayBuffer[(Point, Point, Double)]()
+    val tracking = new ArrayBuffer[(Point, Point, Double)]()
 
     //Adding start point to open
-    // A cool new comment
     open += ((start, empty, GridUtility.distance(start,goal)))
     tracking.append((start, empty, GridUtility.distance(start,goal)))
     while(true) {
       if(open.isEmpty){
-        println("Failed to search")
-        return
+        return List()
       }
-      var current = open.dequeue()
+      val current = open.dequeue()
       tracking.filter(_ != current)
       closed.append(current)
-      if(current._1 == goal){
-        println("Success: Goal Found")
-        return
+      if(current._1 == goal && !grid.isInAPolygon(goal)){
+        return toList(closed)
       }
       //expanding the node
-      var successors = polygons.getNeighbors(current._1)
-      var neighbors = new ArrayBuffer[(Point, Point, Double)]()
+      val successors = grid.getNeighbors(current._1)
+      val neighbors = new ArrayBuffer[(Point, Point, Double)]()
       for(successor <- successors){
         neighbors.append((successor, current._1, GridUtility.distance(successor,goal)))
       }
@@ -45,7 +39,13 @@ object GreedySearch {
         }
       }
     }
-    closed.foreach(println)
 
+    toList(closed)
+  }
+
+  private def toList(l: ArrayBuffer[(Point, Point, Double)]): List[Point] = {
+    l.toList.map { t =>
+      t._1
+    }
   }
 }
