@@ -48,6 +48,11 @@ case class GreedySearchNode(var current: Point, var previous: Point, var h: Doub
   override def compare(that: GreedySearchNode): Int = {
     (this.h compare that.h) * -1
   }
+
+  override def equals(obj: scala.Any): Boolean = obj match {
+    case that: GreedySearchNode => this.current == that.current
+    case _ => false
+  }
 }
 object GreedySearchNode {
   def filter(points: ArrayBuffer[GreedySearchNode]): List[Point] = {
