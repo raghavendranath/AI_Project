@@ -1,5 +1,8 @@
 
 class Grid(polygons: List[Polygon], startPoint: Point, goalPoint: Point) {
+
+  val stats = new Stats()
+
   def canTravelFrom(start: Point, to: Point): Boolean = {
     polygons.foreach { polygon =>
       if (polygon.lineIntersects(start, to)) return false
@@ -20,7 +23,9 @@ class Grid(polygons: List[Polygon], startPoint: Point, goalPoint: Point) {
 
   // Gets the neighbors of the start point
   def getNeighbors(startPoint: Point): List[Point] = {
-    getAllPoints().filter { point => startPoint != point && canTravelFrom(startPoint, point) }
+    val points = getAllPoints().filter { point => startPoint != point && canTravelFrom(startPoint, point) }
+    stats.addBranchingFac(points.length)
+    points
   }
 
   // Outputs the code that will plot the grid in matlab
@@ -39,6 +44,46 @@ class Grid(polygons: List[Polygon], startPoint: Point, goalPoint: Point) {
     }
 
     false
+  }
+
+  def startTimer(): Unit ={
+    stats.startTimer()
+  }
+
+  def stopTimer(): Unit ={
+    stats.stopTimer()
+  }
+
+  def getRuntime(): Double ={
+    stats.getRunTime()
+  }
+
+  def getBranchingFac(): Int ={
+    stats.getBranchingFac()
+  }
+
+  def getEffectiveBranching(): Double ={
+    stats.getEffectiveBranching()
+  }
+
+  def addFinalPath(points: List[Point]): Unit ={
+    stats.addFinalPath(points)
+  }
+
+  def getActualCost(): Double = {
+    stats.getActualCost()
+  }
+
+  def addNodeExpanded(i: Int): Unit ={
+    stats.addNodesExp(i)
+  }
+
+  def getNodesExpanded(): Int ={
+    stats.getNodesExp()
+  }
+
+  def statsToString(): String ={
+    stats.toString
   }
 
   override def toString: String = {

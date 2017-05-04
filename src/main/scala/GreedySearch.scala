@@ -16,14 +16,19 @@ object GreedySearch {
     //Adding start point to open
     open += GreedySearchNode(start, empty, GridUtility.distance(start, goal))
     tracking.append(GreedySearchNode(start, empty, GridUtility.distance(start,goal)))
+    grid.startTimer()
     while(true) {
       if(open.isEmpty){
+        grid.stopTimer()
+        grid.addNodeExpanded(0)
         return List()
       }
       val current = open.dequeue()
       tracking.filter(_ != current)
       closed.append(current)
       if(current.current == goal && !grid.isInAPolygon(goal)){
+        grid.stopTimer()
+        grid.addNodeExpanded(closed.length)
         return GreedySearchNode.filter(closed)
       }
       //expanding the node
@@ -39,7 +44,9 @@ object GreedySearch {
         }
       }
     }
-
+    // should not reach
+    grid.stopTimer()
+    grid.addNodeExpanded(closed.length)
     GreedySearchNode.filter(closed)
   }
 }

@@ -20,14 +20,19 @@ object AStar {
     //Adding start point to open
     open += AStarNode(start, empty, 0.0, GridUtility.distance(start, goal), GridUtility.distance(start, goal))
     tracking.append(AStarNode(start, empty, 0.0, GridUtility.distance(start,goal), GridUtility.distance(start,goal)))
+    grid.startTimer()
     while(true) {
       if(open.isEmpty){
+        grid.stopTimer()
+        grid.addNodeExpanded(0)
         return List()
       }
       val current = open.dequeue()
       tracking.filter(_ != current)
       closed.append(current)
       if(current.current == goal && !grid.isInAPolygon(goal)){
+        grid.stopTimer()
+        grid.addNodeExpanded(closed.length)
         return AStarNode.filter(closed)
       }
       //expanding the node
@@ -58,7 +63,9 @@ object AStar {
         }
       }
     }
-
+    // Should not reach
+    grid.stopTimer()
+    grid.addNodeExpanded(closed.length)
     AStarNode.filter(closed)
   }
 }
