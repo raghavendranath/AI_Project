@@ -11,6 +11,7 @@ class LookAheadSearchTest extends FunSpec {
     ), new Point(0, 0), new Point(10, 10))
 
     val path = LookAheadSearch.search(grid, 2)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0.0,0.0), new Point(8.0,1.0), new Point(10.0,10.0))
     assert(path == expectedPath)
   }
@@ -24,6 +25,7 @@ class LookAheadSearchTest extends FunSpec {
     ), new Point(0,0), new Point(10,10))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0,0), new Point(10,10))
     assert(path == expectedPath)
   }
@@ -38,6 +40,7 @@ class LookAheadSearchTest extends FunSpec {
     ), new Point(0,0), new Point(20,20))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0.0,0.0), new Point(5.0,10.0), new Point(20.0,5.0), new Point(20.0,20.0))
     assert(path == expectedPath)
   }
@@ -46,6 +49,7 @@ class LookAheadSearchTest extends FunSpec {
     val grid = new Grid(List(new Polygon(List(new Point(10,20),new Point(6,20),new Point(3,20),new Point(6,18),new Point(8,19),new Point(11,20))),new Polygon(List(new Point(14,9),new Point(9,8),new Point(14,4),new Point(15,7))),new Polygon(List(new Point(1,3),new Point(0,2),new Point(0,0),new Point(1,0))),new Polygon(List(new Point(13,8),new Point(10,8),new Point(10,5),new Point(7,3),new Point(10,0),new Point(11,3),new Point(13,4))),new Polygon(List(new Point(2,10),new Point(1,8),new Point(0,5),new Point(2,6),new Point(3,8)))), new Point(0,0), new Point(20,20))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0.0,0.0), new Point(0.0,2.0), new Point(11.0,20.0), new Point(20.0,20.0))
     assert(path == expectedPath)
   }
@@ -61,6 +65,7 @@ class LookAheadSearchTest extends FunSpec {
     val grid = new Grid(List(new Polygon(List(new Point(11,4),new Point(8,4),new Point(6,3),new Point(6,0),new Point(8,0),new Point(10,0),new Point(11,1))),new Polygon(List(new Point(11,11),new Point(8,9),new Point(5,10),new Point(4,6),new Point(8,8),new Point(11,6),new Point(11,9))),new Polygon(List(new Point(17,6),new Point(15,5),new Point(17,1),new Point(17,5))),new Polygon(List(new Point(18,16),new Point(16,11),new Point(20,15))),new Polygon(List(new Point(9,20),new Point(6,20),new Point(5,16),new Point(9,17),new Point(12,19))),new Polygon(List(new Point(6,15),new Point(1,14),new Point(6,11),new Point(7,14))),new Polygon(List(new Point(10,14),new Point(6,13),new Point(10,11),new Point(10,13))),new Polygon(List(new Point(11,18),new Point(9,19),new Point(7,17),new Point(8,15),new Point(9,14),new Point(10,14),new Point(12,16))),new Polygon(List(new Point(4,18),new Point(0,17),new Point(3,15),new Point(4,17))),new Polygon(List(new Point(11,7),new Point(7,7),new Point(6,2),new Point(12,0),new Point(12,5)))), new Point(0,0), new Point(20,20))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0.0,0.0), new Point(5.0,10.0), new Point(11.0,11.0), new Point(20.0,20.0))
     assert(path == expectedPath)
   }
@@ -69,6 +74,7 @@ class LookAheadSearchTest extends FunSpec {
     val grid = new Grid(List(new Polygon(List(new Point(6,10),new Point(4,7),new Point(6,6),new Point(7,7))),new Polygon(List(new Point(12,6),new Point(10,2),new Point(9,1),new Point(11,0),new Point(15,1))),new Polygon(List(new Point(9,16),new Point(5,15),new Point(4,13),new Point(4,8),new Point(8,10),new Point(11,12))),new Polygon(List(new Point(17,20),new Point(15,19),new Point(13,16),new Point(16,16),new Point(17,19))),new Polygon(List(new Point(20,18),new Point(15,14),new Point(20,9),new Point(20,14))),new Polygon(List(new Point(3,9),new Point(0,12),new Point(1,9),new Point(1,5),new Point(4,6),new Point(5,9))),new Polygon(List(new Point(19,2),new Point(18,3),new Point(14,4),new Point(17,1),new Point(18,0),new Point(20,0),new Point(20,1))),new Polygon(List(new Point(4,8),new Point(2,4),new Point(3,0),new Point(8,3))),new Polygon(List(new Point(5,8),new Point(5,6),new Point(8,7))),new Polygon(List(new Point(9,7),new Point(8,8),new Point(6,8),new Point(5,5),new Point(8,6),new Point(10,4)))), new Point(0,0), new Point(20,20))
 
     val path = LookAheadSearch.search(grid, 2)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0,0), new Point(20,0), new Point(20,20))
     assert(path == expectedPath)
   }
@@ -77,6 +83,7 @@ class LookAheadSearchTest extends FunSpec {
     val grid = new Grid(List(new Polygon(List(new Point(9,11),new Point(6,9),new Point(5,8),new Point(5,7),new Point(5,3),new Point(9,5),new Point(8,7))),new Polygon(List(new Point(8,6),new Point(5,6),new Point(4,1),new Point(8,1),new Point(12,3))),new Polygon(List(new Point(1,10),new Point(0,10),new Point(0,5),new Point(1,7),new Point(5,7))),new Polygon(List(new Point(10,13),new Point(10,8),new Point(13,11))),new Polygon(List(new Point(14,15),new Point(10,17),new Point(10,13),new Point(12,12),new Point(15,9),new Point(16,13))),new Polygon(List(new Point(17,11),new Point(17,3),new Point(20,6))),new Polygon(List(new Point(12,12),new Point(12,10),new Point(14,12))),new Polygon(List(new Point(2,20),new Point(0,20),new Point(0,16),new Point(2,15),new Point(1,19))),new Polygon(List(new Point(19,20),new Point(18,20),new Point(16,20),new Point(18,19),new Point(18,18),new Point(20,17),new Point(20,20))),new Polygon(List(new Point(15,13),new Point(11,11),new Point(10,10),new Point(12,8),new Point(13,9),new Point(15,10)))), new Point(0,0), new Point(20,20))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0.0,0.0), new Point(5.0,7.0), new Point(2.0,20.0), new Point(20.0,20.0))
     assert(path == expectedPath)
   }
@@ -85,6 +92,7 @@ class LookAheadSearchTest extends FunSpec {
     val grid = new Grid(List(new Polygon(List(new Point(7,12),new Point(4,11),new Point(1,11),new Point(4,9),new Point(7,6),new Point(9,9))),new Polygon(List(new Point(10,9),new Point(6,11),new Point(6,7),new Point(6,6),new Point(7,3),new Point(10,4),new Point(11,6))),new Polygon(List(new Point(13,5),new Point(11,6),new Point(9,4),new Point(9,1),new Point(10,0),new Point(15,0),new Point(14,2))),new Polygon(List(new Point(11,15),new Point(8,17),new Point(6,14),new Point(9,11),new Point(12,11),new Point(15,13))),new Polygon(List(new Point(12,12),new Point(11,6),new Point(16,10))),new Polygon(List(new Point(8,14),new Point(4,11),new Point(5,8),new Point(7,8),new Point(10,10))),new Polygon(List(new Point(0,6),new Point(0,3),new Point(3,3))),new Polygon(List(new Point(11,8),new Point(7,4),new Point(11,1),new Point(11,3))),new Polygon(List(new Point(18,1),new Point(17,0),new Point(18,0),new Point(20,0))),new Polygon(List(new Point(0,20),new Point(1,17),new Point(6,20)))), new Point(0,0), new Point(20,20))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0.0,0.0), new Point(10.0,0.0), new Point(15.0,0.0), new Point(20.0,20.0))
     assert(path == expectedPath)
   }
@@ -94,6 +102,7 @@ class LookAheadSearchTest extends FunSpec {
       new Point(8,2), new Point(20,20))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List(new Point(8.0,2.0), new Point(10.0,0.0), new Point(15.0,0.0), new Point(20.0,20.0))
     assert(path == expectedPath)
   }
@@ -103,6 +112,7 @@ class LookAheadSearchTest extends FunSpec {
       new Point(0,0), new Point(11,10))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List()
     assert(path == expectedPath)
   }
@@ -112,6 +122,7 @@ class LookAheadSearchTest extends FunSpec {
       new Point(11,10), new Point(0,0))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List()
     assert(path == expectedPath)
   }
@@ -126,6 +137,7 @@ class LookAheadSearchTest extends FunSpec {
     ), new Point(0,0), new Point(6,6))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List()
     assert(path == expectedPath)
   }
@@ -135,6 +147,7 @@ class LookAheadSearchTest extends FunSpec {
       new Point(30,5), new Point(70,70))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List(new Point(30.0,5.0), new Point(78.0,25.0), new Point(71.0,43.0), new Point(70.0,70.0))
     assert(path == expectedPath)
   }
@@ -144,6 +157,7 @@ class LookAheadSearchTest extends FunSpec {
       new Point(20,10), new Point(70,100))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List(new Point(20.0,10.0), new Point(32.0,27.0), new Point(83.0,95.0), new Point(70.0,100.0))
     assert(path == expectedPath)
   }
@@ -153,6 +167,7 @@ class LookAheadSearchTest extends FunSpec {
       new Point(5,95), new Point(30,50))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List(new Point(5.0,95.0), new Point(0.0,93.0), new Point(0.0,10.0), new Point(30.0,50.0))
     assert(path == expectedPath)
   }
@@ -162,6 +177,7 @@ class LookAheadSearchTest extends FunSpec {
       new Point(10,20), new Point(100,80))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List(new Point(10,20), new Point(65,28), new Point(100,70), new Point(100,80))
     assert(path == expectedPath)
   }
@@ -171,6 +187,7 @@ class LookAheadSearchTest extends FunSpec {
       new Point(50,65), new Point(5,5))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List(new Point(50.0,65.0), new Point(51.0,88.0), new Point(0.0,31.0), new Point(0.0,11.0), new Point(5.0,5.0))
     assert(path == expectedPath)
   }
@@ -180,6 +197,7 @@ class LookAheadSearchTest extends FunSpec {
       new Point(33,30), new Point(56,36))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List(new Point(33.0,30.0), new Point(19.0,42.0), new Point(30.0,38.0), new Point(32.0,26.0), new Point(33.0,35.0), new Point(28.0,14.0), new Point(59.0,15.0), new Point(79.0,19.0), new Point(56.0,36.0))
     assert(path == expectedPath)
   }
@@ -189,6 +207,7 @@ class LookAheadSearchTest extends FunSpec {
       new Point(100,100), new Point(700,520))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List(new Point(100.0,100.0), new Point(383.0,0.0), new Point(794.0,0.0), new Point(426.0,232.0), new Point(761.0,268.0), new Point(806.0,251.0), new Point(604.0,429.0), new Point(792.0,235.0), new Point(771.0,220.0), new Point(608.0,268.0), new Point(498.0,101.0), new Point(670.0,357.0), new Point(610.0,347.0), new Point(783.0,310.0), new Point(611.0,407.0), new Point(696.0,423.0), new Point(699.0,400.0), new Point(715.0,387.0), new Point(732.0,381.0), new Point(689.0,241.0), new Point(377.0,287.0), new Point(267.0,550.0), new Point(234.0,368.0), new Point(204.0,291.0), new Point(338.0,554.0), new Point(240.0,446.0), new Point(193.0,491.0), new Point(364.0,557.0), new Point(429.0,522.0), new Point(535.0,663.0), new Point(571.0,861.0), new Point(795.0,619.0), new Point(798.0,547.0), new Point(700.0,520.0))
     assert(path == expectedPath)
   }
@@ -198,6 +217,7 @@ class LookAheadSearchTest extends FunSpec {
       new Point(550,400), new Point(900,900))
 
     val path = LookAheadSearch.search(grid, 3)
+    println(grid.statsToString())
     val expectedPath = List()
     assert(path == expectedPath)
   }

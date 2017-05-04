@@ -20,7 +20,7 @@ object GreedySearch {
     while(true) {
       if(open.isEmpty){
         grid.stopTimer()
-        grid.addNodeExpanded(0)
+        grid.addNodeExpanded(closed.length)
         return List()
       }
       val current = open.dequeue()
