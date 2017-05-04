@@ -14,12 +14,9 @@ object AStar {
     val goal = grid.getGoal
     var open = new mutable.PriorityQueue[AStarNode]()( Ordering[AStarNode])
     var closed = new ArrayBuffer[AStarNode]()
-    // to keep track of open list
-    val tracking = new ArrayBuffer[AStarNode]()
 
     //Adding start point to open
     open += AStarNode(start, empty, 0.0, GridUtility.distance(start, goal), GridUtility.distance(start, goal))
-    tracking.append(AStarNode(start, empty, 0.0, GridUtility.distance(start,goal), GridUtility.distance(start,goal)))
     grid.startTimer()
     while(true) {
       if(open.isEmpty){
@@ -28,7 +25,6 @@ object AStar {
         return List()
       }
       val current = open.dequeue()
-      tracking.filter(_ != current)
       closed.append(current)
       if(current.current == goal && !grid.isInAPolygon(goal)){
         grid.stopTimer()
@@ -45,19 +41,15 @@ object AStar {
         neighbors.append(AStarNode(successor, current.current, g, h, f))
       }
       for(neighbor <- neighbors){
-        if(!(tracking.contains(neighbor) || closed.contains(neighbor))){
+        if(!(open.exists(n => n == neighbor) || closed.contains(neighbor))){
           open += neighbor
-          tracking.append(neighbor)
         }
-        else if(tracking.contains(neighbor)){
-
+        else if(open.exists(n => n == neighbor)){
           open.foreach { node =>
             if (node.current == neighbor.current && node.g > neighbor.g) {
               node.previous = neighbor.previous
               node.g = neighbor.g
               node.f = neighbor.f
-              tracking.filter(_ !=node)
-              tracking.append(neighbor)
             }
           }
         }

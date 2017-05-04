@@ -10,12 +10,10 @@ object GreedySearch {
     val goal = grid.getGoal
     var open = new mutable.PriorityQueue[GreedySearchNode]()(Ordering[GreedySearchNode])
     var closed = new ArrayBuffer[GreedySearchNode]()
-    // to keep track of open list
-    val tracking = new ArrayBuffer[GreedySearchNode]()
 
     //Adding start point to open
     open += GreedySearchNode(start, empty, GridUtility.distance(start, goal))
-    tracking.append(GreedySearchNode(start, empty, GridUtility.distance(start,goal)))
+    // get all children, find distance from children to goal + actual distance to the child
     grid.startTimer()
     while(true) {
       if(open.isEmpty){
@@ -24,7 +22,6 @@ object GreedySearch {
         return List()
       }
       val current = open.dequeue()
-      tracking.filter(_ != current)
       closed.append(current)
       if(current.current == goal && !grid.isInAPolygon(goal)){
         grid.stopTimer()
@@ -38,9 +35,8 @@ object GreedySearch {
         neighbors.append(GreedySearchNode(successor, current.current, GridUtility.distance(successor,goal)))
       }
       for(neighbor <- neighbors){
-        if(!(tracking.contains(neighbor) ||closed.contains(neighbor))){
+        if(!(open.exists(n => n == neighbor) ||closed.contains(neighbor))){
           open += neighbor
-          tracking.append(neighbor)
         }
       }
     }
