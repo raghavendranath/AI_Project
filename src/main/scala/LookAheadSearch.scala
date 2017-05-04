@@ -11,11 +11,14 @@ object LookAheadSearch {
       if (possiblePath.length <= 1) {
         // We got the same input back, maybe we got stuck in one place?
         grid.stopTimer()
+        grid.addFinalPath(List())
         return List()
       }
       if(possiblePath.contains(grid.getGoal)) {
         grid.stopTimer()
-        return finalPath ::: possiblePath.drop(1)
+        finalPath = finalPath ::: possiblePath.drop(1)
+        grid.addFinalPath(finalPath)
+        return finalPath
       }
       // We have a new move to make
       currentPoint = possiblePath(1)
@@ -24,6 +27,7 @@ object LookAheadSearch {
 
     // Shouldn't reach here
     grid.stopTimer()
+    grid.addFinalPath(finalPath)
     finalPath
   }
 

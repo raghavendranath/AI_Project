@@ -1,5 +1,6 @@
 
 class Grid(polygons: List[Polygon], startPoint: Point, goalPoint: Point) {
+  private var neighborMap = Map[Point, List[Point]]()
 
   val stats = new Stats()
 
@@ -23,9 +24,18 @@ class Grid(polygons: List[Polygon], startPoint: Point, goalPoint: Point) {
 
   // Gets the neighbors of the start point
   def getNeighbors(startPoint: Point): List[Point] = {
-    val points = getAllPoints().filter { point => startPoint != point && canTravelFrom(startPoint, point) }
-    stats.addBranchingFac(points.length)
-    points
+    neighborMap.get(startPoint) match {
+      case None =>
+        // Compute and add
+        val points = getAllPoints().filter { point => startPoint != point && canTravelFrom(startPoint, point) }
+        stats.addBranchingFac(points.length)
+        neighborMap = neighborMap + (startPoint -> points)
+        points
+      case Some(list) =>
+        stats.addBranchingFac(list.length)
+        list
+    }
+
   }
 
   // Outputs the code that will plot the grid in matlab
