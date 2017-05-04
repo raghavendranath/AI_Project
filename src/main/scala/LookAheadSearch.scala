@@ -1,23 +1,29 @@
 
 object LookAheadSearch {
   def search(grid: Grid,k: Int): List[Point] = {
-
     var currentPoint = grid.getStart
     var finalPath = List[Point](grid.getStart)
+    grid.startTimer()
     while(true) {
       if (currentPoint == grid.getGoal) return finalPath
 
       val possiblePath = findBestChild(k, currentPoint, grid, finalPath)
       if (possiblePath.length <= 1) {
         // We got the same input back, maybe we got stuck in one place?
+        grid.stopTimer()
         return List()
       }
-      if(possiblePath.contains(grid.getGoal)) return finalPath ::: possiblePath.drop(1)
+      if(possiblePath.contains(grid.getGoal)) {
+        grid.stopTimer()
+        return finalPath ::: possiblePath.drop(1)
+      }
       // We have a new move to make
       currentPoint = possiblePath(1)
       finalPath = finalPath :+ currentPoint
     }
 
+    // Shouldn't reach here
+    grid.stopTimer()
     finalPath
   }
 
@@ -25,6 +31,7 @@ object LookAheadSearch {
     if (depth == 0 || current == grid.getGoal) return List(current)
 
     val neighbors = grid.getNeighbors(current).filter{ p => !traversedPoints.contains(p)}
+    grid.addNodeExpanded(neighbors.length)
     val bestPaths = neighbors.map { neighbor =>
       current :: findBestChild(depth - 1, neighbor, grid, traversedPoints :+ neighbor)
     }.filter {l => l.length > 1}

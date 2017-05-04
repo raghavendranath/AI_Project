@@ -34,7 +34,7 @@ class Grid(polygons: List[Polygon], startPoint: Point, goalPoint: Point) {
       s + polygon.toMatlab +","
     }
 
-    s.substring(0, s.length - 1) +");xlim([0 "+ goalPoint.x +"]);ylim([0 "+ goalPoint.y +"]);hold on;"
+    s.substring(0, s.length - 1) +");hold on;"
   }
 
   // Checks all polygons to make sure that the point is not in the polygon, but it is okay if it is a vertex
