@@ -1,7 +1,13 @@
 object GridUtility {
   def distance(p1: Point, p2: Point): Double = {
-    val x = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2))
-    x
+    Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2))
+  }
+
+  def diagonalDistance(p1: Point, p2: Point): Double = {
+    val dx = Math.abs(p2.x - p1.x)
+    val dy = Math.abs(p2.y - p1.y)
+
+    (dx + dy) -1 * Math.min(dx, dy)
   }
 
   // Returns the point where the two lines intersect
