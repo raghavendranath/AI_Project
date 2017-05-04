@@ -34,7 +34,7 @@ object Lookahead {
         val currentVertex = current
         val neighbors = new ArrayBuffer[LookaheadNode]()
         var successors = List[Point]()
-        for (i <- 1 to k) {
+        for (i <- 1 to k; if !foundEndOfTree) {
           if (i == 1) {
             successors = grid.getNeighbors(currentVertex.current)
             for (successor <- successors) {
@@ -68,6 +68,9 @@ object Lookahead {
                   tracking.append(children)
                 }
               }
+//              if (tracking.exists { node => node.current == goal}) {
+//                foundEndOfTree = true
+//              }
             }
           }
         }
