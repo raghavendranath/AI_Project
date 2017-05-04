@@ -11,6 +11,8 @@ class GreedySearchTest extends FunSpec{
     ), new Point(0,0), new Point(10,10))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0,0), new Point(4,6), new Point(4,8), new Point(10,10))
     assert(path == expectedPath)
   }
@@ -24,6 +26,8 @@ class GreedySearchTest extends FunSpec{
     ), new Point(0,0), new Point(10,10))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0,0), new Point(10,10))
     assert(path == expectedPath)
   }
@@ -38,6 +42,8 @@ class GreedySearchTest extends FunSpec{
     ), new Point(0,0), new Point(20,20))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0,0), new Point(12,12), new Point(11,15), new Point(15,18), new Point(20,20))
     assert(path == expectedPath)
   }
@@ -46,6 +52,8 @@ class GreedySearchTest extends FunSpec{
     val grid = new Grid(List(new Polygon(List(new Point(10,20),new Point(6,20),new Point(3,20),new Point(6,18),new Point(8,19),new Point(11,20))),new Polygon(List(new Point(14,9),new Point(9,8),new Point(14,4),new Point(15,7))),new Polygon(List(new Point(1,3),new Point(0,2),new Point(0,0),new Point(1,0))),new Polygon(List(new Point(13,8),new Point(10,8),new Point(10,5),new Point(7,3),new Point(10,0),new Point(11,3),new Point(13,4))),new Polygon(List(new Point(2,10),new Point(1,8),new Point(0,5),new Point(2,6),new Point(3,8)))), new Point(0,0), new Point(20,20))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0,0), new Point(10,0), new Point(14,4), new Point(20,20))
     assert(path == expectedPath)
   }
@@ -53,6 +61,8 @@ class GreedySearchTest extends FunSpec{
   registerTest("Moderate greedy search 3") {
     val grid = new Grid(List(new Polygon(List(new Point(3,15),new Point(0,14),new Point(0,11),new Point(0,9),new Point(2,8),new Point(1,11))),new Polygon(List(new Point(17,8),new Point(16,5),new Point(20,7))),new Polygon(List(new Point(6,13),new Point(1,9),new Point(5,5),new Point(8,9))),new Polygon(List(new Point(13,5),new Point(14,3),new Point(19,3))),new Polygon(List(new Point(17,6),new Point(14,4),new Point(13,3),new Point(14,2),new Point(14,0),new Point(15,2),new Point(19,2))),new Polygon(List(new Point(11,13),new Point(10,13),new Point(8,13),new Point(8,9),new Point(12,9),new Point(14,13))),new Polygon(List(new Point(9,11),new Point(5,10),new Point(8,5),new Point(10,10))),new Polygon(List(new Point(19,9),new Point(17,9),new Point(14,9),new Point(13,5),new Point(17,5),new Point(20,4),new Point(20,7))),new Polygon(List(new Point(4,4),new Point(1,0),new Point(3,0),new Point(7,0))),new Polygon(List(new Point(9,16),new Point(10,9),new Point(16,12)))), new Point(0,0), new Point(20,20))
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0,0), new Point(0,14), new Point(3,15), new Point(20,20))
     assert(path == expectedPath)
   }
@@ -61,6 +71,8 @@ class GreedySearchTest extends FunSpec{
     val grid = new Grid(List(new Polygon(List(new Point(11,4),new Point(8,4),new Point(6,3),new Point(6,0),new Point(8,0),new Point(10,0),new Point(11,1))),new Polygon(List(new Point(11,11),new Point(8,9),new Point(5,10),new Point(4,6),new Point(8,8),new Point(11,6),new Point(11,9))),new Polygon(List(new Point(17,6),new Point(15,5),new Point(17,1),new Point(17,5))),new Polygon(List(new Point(18,16),new Point(16,11),new Point(20,15))),new Polygon(List(new Point(9,20),new Point(6,20),new Point(5,16),new Point(9,17),new Point(12,19))),new Polygon(List(new Point(6,15),new Point(1,14),new Point(6,11),new Point(7,14))),new Polygon(List(new Point(10,14),new Point(6,13),new Point(10,11),new Point(10,13))),new Polygon(List(new Point(11,18),new Point(9,19),new Point(7,17),new Point(8,15),new Point(9,14),new Point(10,14),new Point(12,16))),new Polygon(List(new Point(4,18),new Point(0,17),new Point(3,15),new Point(4,17))),new Polygon(List(new Point(11,7),new Point(7,7),new Point(6,2),new Point(12,0),new Point(12,5)))), new Point(0,0), new Point(20,20))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0,0), new Point(5,10), new Point(11,11), new Point(20,20))
     assert(path == expectedPath)
   }
@@ -69,6 +81,8 @@ class GreedySearchTest extends FunSpec{
     val grid = new Grid(List(new Polygon(List(new Point(6,10),new Point(4,7),new Point(6,6),new Point(7,7))),new Polygon(List(new Point(12,6),new Point(10,2),new Point(9,1),new Point(11,0),new Point(15,1))),new Polygon(List(new Point(9,16),new Point(5,15),new Point(4,13),new Point(4,8),new Point(8,10),new Point(11,12))),new Polygon(List(new Point(17,20),new Point(15,19),new Point(13,16),new Point(16,16),new Point(17,19))),new Polygon(List(new Point(20,18),new Point(15,14),new Point(20,9),new Point(20,14))),new Polygon(List(new Point(3,9),new Point(0,12),new Point(1,9),new Point(1,5),new Point(4,6),new Point(5,9))),new Polygon(List(new Point(19,2),new Point(18,3),new Point(14,4),new Point(17,1),new Point(18,0),new Point(20,0),new Point(20,1))),new Polygon(List(new Point(4,8),new Point(2,4),new Point(3,0),new Point(8,3))),new Polygon(List(new Point(5,8),new Point(5,6),new Point(8,7))),new Polygon(List(new Point(9,7),new Point(8,8),new Point(6,8),new Point(5,5),new Point(8,6),new Point(10,4)))), new Point(0,0), new Point(20,20))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0,0), new Point(20,0), new Point(20,20))
     assert(path == expectedPath)
   }
@@ -77,6 +91,8 @@ class GreedySearchTest extends FunSpec{
     val grid = new Grid(List(new Polygon(List(new Point(9,11),new Point(6,9),new Point(5,8),new Point(5,7),new Point(5,3),new Point(9,5),new Point(8,7))),new Polygon(List(new Point(8,6),new Point(5,6),new Point(4,1),new Point(8,1),new Point(12,3))),new Polygon(List(new Point(1,10),new Point(0,10),new Point(0,5),new Point(1,7),new Point(5,7))),new Polygon(List(new Point(10,13),new Point(10,8),new Point(13,11))),new Polygon(List(new Point(14,15),new Point(10,17),new Point(10,13),new Point(12,12),new Point(15,9),new Point(16,13))),new Polygon(List(new Point(17,11),new Point(17,3),new Point(20,6))),new Polygon(List(new Point(12,12),new Point(12,10),new Point(14,12))),new Polygon(List(new Point(2,20),new Point(0,20),new Point(0,16),new Point(2,15),new Point(1,19))),new Polygon(List(new Point(19,20),new Point(18,20),new Point(16,20),new Point(18,19),new Point(18,18),new Point(20,17),new Point(20,20))),new Polygon(List(new Point(15,13),new Point(11,11),new Point(10,10),new Point(12,8),new Point(13,9),new Point(15,10)))), new Point(0,0), new Point(20,20))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0,0), new Point(5,7), new Point(2,20), new Point(20,20))
     assert(path == expectedPath)
   }
@@ -85,6 +101,8 @@ class GreedySearchTest extends FunSpec{
     val grid = new Grid(List(new Polygon(List(new Point(7,12),new Point(4,11),new Point(1,11),new Point(4,9),new Point(7,6),new Point(9,9))),new Polygon(List(new Point(10,9),new Point(6,11),new Point(6,7),new Point(6,6),new Point(7,3),new Point(10,4),new Point(11,6))),new Polygon(List(new Point(13,5),new Point(11,6),new Point(9,4),new Point(9,1),new Point(10,0),new Point(15,0),new Point(14,2))),new Polygon(List(new Point(11,15),new Point(8,17),new Point(6,14),new Point(9,11),new Point(12,11),new Point(15,13))),new Polygon(List(new Point(12,12),new Point(11,6),new Point(16,10))),new Polygon(List(new Point(8,14),new Point(4,11),new Point(5,8),new Point(7,8),new Point(10,10))),new Polygon(List(new Point(0,6),new Point(0,3),new Point(3,3))),new Polygon(List(new Point(11,8),new Point(7,4),new Point(11,1),new Point(11,3))),new Polygon(List(new Point(18,1),new Point(17,0),new Point(18,0),new Point(20,0))),new Polygon(List(new Point(0,20),new Point(1,17),new Point(6,20)))), new Point(0,0), new Point(20,20))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(0,0), new Point(0,20), new Point(20,20))
     assert(path == expectedPath)
   }
@@ -94,6 +112,8 @@ class GreedySearchTest extends FunSpec{
       new Point(8,2), new Point(20,20))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(8,2), new Point(7,3), new Point(1,11), new Point(8,17), new Point(20,20))
     assert(path == expectedPath)
   }
@@ -103,6 +123,8 @@ class GreedySearchTest extends FunSpec{
       new Point(0,0), new Point(11,10))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List()
     assert(path == expectedPath)
   }
@@ -112,6 +134,8 @@ class GreedySearchTest extends FunSpec{
       new Point(11,10), new Point(0,0))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List()
     assert(path == expectedPath)
   }
@@ -126,6 +150,8 @@ class GreedySearchTest extends FunSpec{
     ), new Point(0,0), new Point(6,6))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List()
     assert(path == expectedPath)
   }
@@ -135,6 +161,8 @@ class GreedySearchTest extends FunSpec{
       new Point(30,5), new Point(70,70))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(30,5), new Point(78,25), new Point(62,58), new Point(70,70))
     assert(path == expectedPath)
   }
@@ -144,6 +172,8 @@ class GreedySearchTest extends FunSpec{
       new Point(20,10), new Point(70,100))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(20,10), new Point(35,31), new Point(83,95), new Point(70,100))
     assert(path == expectedPath)
   }
@@ -153,6 +183,8 @@ class GreedySearchTest extends FunSpec{
       new Point(5,95), new Point(30,50))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(5,95), new Point(0,93), new Point(0,54), new Point(2,38), new Point(23,34), new Point(30,50))
     assert(path == expectedPath)
   }
@@ -162,6 +194,8 @@ class GreedySearchTest extends FunSpec{
       new Point(10,20), new Point(100,80))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(10,20), new Point(65,28), new Point(100,70), new Point(100,80))
     assert(path == expectedPath)
   }
@@ -171,6 +205,8 @@ class GreedySearchTest extends FunSpec{
       new Point(50,65), new Point(5,5))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(50,65), new Point(61,60), new Point(67,52), new Point(71,13), new Point(12,24), new Point(3,32), new Point(0,31), new Point(0,11), new Point(5,5))
     assert(path == expectedPath)
   }
@@ -180,6 +216,8 @@ class GreedySearchTest extends FunSpec{
       new Point(33,30), new Point(56,36))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(33,30), new Point(28,14), new Point(59,15), new Point(70,18), new Point(55,39), new Point(56,36))
     assert(path == expectedPath)
   }
@@ -189,6 +227,8 @@ class GreedySearchTest extends FunSpec{
       new Point(100,100), new Point(700,520))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(100,100), new Point(383,0), new Point(794,0), new Point(565,164), new Point(461,317), new Point(434,455), new Point(446,511), new Point(549,681), new Point(649,742), new Point(795,619), new Point(724,501), new Point(700,520))
     assert(path == expectedPath)
   }
@@ -198,6 +238,8 @@ class GreedySearchTest extends FunSpec{
       new Point(550,400), new Point(900,900))
 
     val path = GreedySearch.search(grid)
+    grid.addFinalPath(path)
+    println(grid.statsToString())
     val expectedPath = List(new Point(550.0,400.0), new Point(579.0,358.0), new Point(642.0,332.0), new Point(446.0,378.0), new Point(593.0,52.0), new Point(703.0,9.0), new Point(749.0,29.0), new Point(776.0,844.0), new Point(793.0,887.0), new Point(837.0,977.0), new Point(900.0,900.0))
     assert(path == expectedPath)
   }
