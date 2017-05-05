@@ -84,8 +84,8 @@ class Polygon(var points: List[Point]) {
       val nextVertex = points(distinctVertices(i+1)) // Okay since the loop is length - 2
     val midpoint = new Point((vertex.x + nextVertex.x)/2, (vertex.y + nextVertex.y)/2)
       val indexDiff = Math.abs(distinctVertices(i) - distinctVertices(i+1))
-      val adjacentVerticies = indexDiff != 1 && indexDiff != points.length - 1
-      if (contains(midpoint) && adjacentVerticies) {
+      val adjacentVertices = indexDiff != 1 && indexDiff != points.length - 1
+      if (contains(midpoint) && adjacentVertices) {
         // Polygon contains the midpoint between two vertices, and the two vertices are adjacent
         // means the line intersects the polygon
         return true
