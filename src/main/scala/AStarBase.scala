@@ -35,7 +35,7 @@ abstract class AStarBase {
       //expanding the node
       grid.getNeighbors(current.current).foreach { neighborPoint =>
         val g = current.g + GridUtility.distance(current.current, neighborPoint)
-        val h = GridUtility.distance(neighborPoint, goal)
+        val h = calculateHeuristic(neighborPoint, grid)
         val f = g + h
         val neighbor = AStarNode(neighborPoint, current.current, g, h, f)
 

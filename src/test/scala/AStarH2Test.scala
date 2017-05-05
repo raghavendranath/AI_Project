@@ -1,6 +1,6 @@
 import org.scalatest.FunSpec
 
-class AStarH1Test extends FunSpec{
+class AStarH2Test extends FunSpec{
   def helper(grid: Grid, expectedPath: List[Point]): Unit = {
     val path = AStarH2.search(grid)
     grid.addFinalPath(path)
