@@ -41,6 +41,8 @@ object GridUtility {
     new Grid(polygons.toList, new Point(0,0), goalState)
   }
 
+  // Returns the list in a string that can be copied to Matlab which will then plot the points on a graph.
+  // Use in conjunction with grid.toMatlab to display the polygons
   def toMatlab(points: List[Point]): String = {
     var result = points.foldLeft("scatter([") { (s, point) =>
       s + point.x.toInt +" "
