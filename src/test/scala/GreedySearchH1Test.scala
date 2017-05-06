@@ -1,5 +1,8 @@
 import org.scalatest.FunSpec
 
+/*
+ * Runs all of the tests in TestUtility using GreedySearchH1 heuristic
+ */
 class GreedySearchH1Test extends FunSpec{
   def helper(grid: Grid, expectedPath: List[Point]): Unit = {
     val path = GreedySearchH1.search(grid)

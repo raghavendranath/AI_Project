@@ -1,5 +1,8 @@
-import org.scalatest._
+import org.scalatest.FlatSpec
 
+/*
+ * Test cases to verify that some of the methods in the polygon class are accurate
+ */
 class PolygonTest extends FlatSpec {
   "A square" should "be intersected by a diagonal line" in {
     val tempPoly = new Polygon(List(new Point(1, 1), new Point(1, 2), new Point(2,2), new Point(2, 1)))

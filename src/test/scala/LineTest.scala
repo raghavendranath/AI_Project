@@ -1,4 +1,8 @@
 import org.scalatest.FunSpec
+
+/*
+ * Test cases to verify that the methods in the line class are correct
+ */
 class LineTest extends FunSpec {
   registerTest("Positive slope") {
     val line = new Line(new Point(1,1), new Point(2,2))

@@ -1,5 +1,8 @@
 import org.scalatest.FunSpec
 
+/*
+ * Runs all of the tests in TestUtility using LookAheadSearch heuristic
+ */
 class LookAheadSearchTest extends FunSpec {
   def helper(grid: Grid, expectedPath: List[Point]): Unit = {
     val path = LookAheadSearch.search(grid, 3)

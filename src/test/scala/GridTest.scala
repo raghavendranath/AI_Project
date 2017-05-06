@@ -1,5 +1,8 @@
 import org.scalatest.FunSpec
 
+/*
+ * Test cases to verify that some of the methods in the grid class are accurate
+ */
 class GridTest extends FunSpec {
   registerTest("(1,1) should be travelable from (0,0) with square polygon") {
     val tempPoly = List(new Polygon(List(new Point(1,1), new Point(2,1), new Point(2,2), new Point(1,2))))
@@ -45,17 +48,6 @@ class GridTest extends FunSpec {
 
     assert(grid.getNeighbors(new Point(0,0)) == expectedNeighbors)
   }
-
-  // This test fails, but it is okay since the missing points are ones that are on the same polygon
-  // and are parallel. This is a geometry test, which doesn't affect the search algorithms.
-//  registerTest("Final all the neighbors properly 2") {
-//    val grid = new Grid(List(new Polygon(List(new Point(5.0,9.0),new Point(2.0,8.0),new Point(0.0,8.0),new Point(0.0,5.0),new Point(2.0,5.0),new Point(3.0,5.0),new Point(4.0,7.0))),new Polygon(List(new Point(3.0,2.0),new Point(0.0,2.0),new Point(0.0,0.0),new Point(3.0,0.0),new Point(6.0,0.0))),new Polygon(List(new Point(9.0,17.0),new Point(7.0,15.0),new Point(6.0,12.0),new Point(10.0,10.0),new Point(11.0,14.0))),new Polygon(List(new Point(11.0,16.0),new Point(9.0,13.0),new Point(6.0,13.0),new Point(8.0,9.0),new Point(12.0,9.0),new Point(10.0,13.0))),new Polygon(List(new Point(20.0,2.0),new Point(18.0,2.0),new Point(18.0,1.0),new Point(16.0,0.0),new Point(18.0,0.0),new Point(20.0,0.0)))), new Point(0.0,0.0), new Point(20.0,20.0))
-//    val expectedNeighbors = List(new Point(0.0,8.0),new Point(0.0,5.0),new Point(0.0,2.0),new Point(3.0,0.0),new Point(6.0,0.0),new Point(16.0,0.0),new Point(18.0,0.0),new Point(20.0,0.0))
-//    println(grid.toMatlab)
-//    println(GridUtility.toMatlab(expectedNeighbors))
-//    println(GridUtility.toMatlab(grid.getNeighbors(new Point(0,0))))
-//    assert(grid.getNeighbors(new Point(0,0)) == expectedNeighbors)
-//  }
 
   registerTest("Should have all the proper neighbors when starting on a vertex") {
     val grid = new Grid(List(new Polygon(List(new Point(0,0), new Point(0,2), new Point(2,0)))), new Point(0,0), new Point(5,5))

@@ -1,5 +1,8 @@
 import org.scalatest.FunSpec
 
+/*
+ * Runs all of the tests in TestUtility using AStarH2 heuristic
+ */
 class AStarH2Test extends FunSpec{
   def helper(grid: Grid, expectedPath: List[Point]): Unit = {
     val path = AStarH2.search(grid)

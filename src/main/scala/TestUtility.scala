@@ -284,15 +284,15 @@ object TestUtility {
   ), new Point(33,30), new Point(56,36))
 
   def LargeTest7: Grid = new Grid(List(
-    new Polygon(List(new Point(67.0,21.0),new Point(51.0,19.0),new Point(55.0,4.0),new Point(65.0,7.0),new Point(77.0,10.0))),
-    new Polygon(List(new Point(49.0,47.0),new Point(36.0,44.0),new Point(36.0,36.0),new Point(24.0,27.0),new Point(36.0,24.0),new Point(48.0,23.0),new Point(53.0,34.0))),
-    new Polygon(List(new Point(40.0,100.0),new Point(49.0,94.0),new Point(62.0,99.0))),
-    new Polygon(List(new Point(85.0,60.0),new Point(71.0,47.0),new Point(74.0,38.0),new Point(82.0,32.0),new Point(100.0,41.0))),
-    new Polygon(List(new Point(21.0,100.0),new Point(14.0,76.0),new Point(20.0,62.0),new Point(42.0,76.0))),
-    new Polygon(List(new Point(33.0,83.0),new Point(16.0,91.0),new Point(15.0,72.0),new Point(4.0,60.0),new Point(20.0,63.0),new Point(25.0,65.0),new Point(32.0,69.0))),
-    new Polygon(List(new Point(31.0,36.0),new Point(13.0,30.0),new Point(11.0,20.0),new Point(13.0,16.0),new Point(13.0,7.0),new Point(31.0,0.0),new Point(33.0,17.0))),
-    new Polygon(List(new Point(88.0,85.0),new Point(82.0,84.0),new Point(64.0,89.0),new Point(62.0,69.0),new Point(78.0,56.0),new Point(96.0,64.0),new Point(100.0,80.0))),
-    new Polygon(List(new Point(17.0,54.0),new Point(18.0,45.0),new Point(32.0,49.0))),
-    new Polygon(List(new Point(82.0,90.0),new Point(60.0,95.0),new Point(55.0,74.0),new Point(65.0,60.0),new Point(84.0,53.0),new Point(76.0,74.0)))
-  ), new Point(0.0,0.0), new Point(75,92))
+    new Polygon(List(new Point(67,21),new Point(51,19),new Point(55,4),new Point(65,7),new Point(77,10))),
+    new Polygon(List(new Point(49,47),new Point(36,44),new Point(36,36),new Point(24,27),new Point(36,24),new Point(48,23),new Point(53,34))),
+    new Polygon(List(new Point(40,100),new Point(49,94),new Point(62,99))),
+    new Polygon(List(new Point(85,60),new Point(71,47),new Point(74,38),new Point(82,32),new Point(100,41))),
+    new Polygon(List(new Point(21,100),new Point(14,76),new Point(20,62),new Point(42,76))),
+    new Polygon(List(new Point(33,83),new Point(16,91),new Point(15,72),new Point(4,60),new Point(20,63),new Point(25,65),new Point(32,69))),
+    new Polygon(List(new Point(31,36),new Point(13,30),new Point(11,20),new Point(13,16),new Point(13,7),new Point(31,0),new Point(33,17))),
+    new Polygon(List(new Point(88,85),new Point(82,84),new Point(64,89),new Point(62,69),new Point(78,56),new Point(96,64),new Point(100,80))),
+    new Polygon(List(new Point(17,54),new Point(18,45),new Point(32,49))),
+    new Polygon(List(new Point(82,90),new Point(60,95),new Point(55,74),new Point(65,60),new Point(84,53),new Point(76,74)))
+  ), new Point(0,0), new Point(75,92))
 }
