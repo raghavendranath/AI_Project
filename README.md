@@ -7,7 +7,7 @@
 
 ### Building
 ```
-sbt build
+sbt compile
 ```
 ### Testing
 Run all tests

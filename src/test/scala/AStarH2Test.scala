@@ -82,7 +82,7 @@ class AStarH2Test extends FunSpec{
   }
 
   registerTest("Large A* search 2") {
-    val expectedPath = List(new Point(20,10), new Point(32,27), new Point(58,76), new Point(60,100), new Point(70,100))
+    val expectedPath = List(new Point(20.0,10.0), new Point(32.0,27.0), new Point(42.0,50.0), new Point(46.0,73.0), new Point(47.0,78.0), new Point(60.0,100.0), new Point(70.0,100.0))
     helper(TestUtility.LargeTest2, expectedPath)
   }
 
