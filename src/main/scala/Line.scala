@@ -1,3 +1,7 @@
+/*
+ * A line class which helps with geometry. Holds a line in the form of y = mx+b along with the start point and end point
+ * of the line
+ */
 sealed abstract class Eq
 case class Line() extends Eq {
   var p1: Point = _
@@ -19,6 +23,7 @@ case class Line() extends Eq {
     }
   }
 
+  // Returns true if a line intersects with another line
   def intersectsWith(line: Line): Point = {
     if (isParallelWith(line)) {
       if (p1 == line.p1) return p1
@@ -51,8 +56,10 @@ case class Line() extends Eq {
     if (contains(point) && line.contains(point)) point else null
   }
 
+  // Returns true if a line is parallel with another line
   def isParallelWith(line: Line): Boolean = m == line.m
 
+  // Returns true if a point contains another point. Rounded slightly to help with floating point numbers
   def contains(point: Point): Boolean = {
     val x = GridUtility.distance(p1, point)
     val y = GridUtility.distance(p2, point)

@@ -1,9 +1,13 @@
-
+/*
+ * Grid wraps up all of the state for easy running of a test. It contains all of the polygons, the start point, and
+ * the end goal, and contains some methods that are used when searching
+ */
 class Grid(polygons: List[Polygon], startPoint: Point, goalPoint: Point) {
   private var neighborMap = Map[Point, List[Point]]()
 
   val stats = new Stats()
 
+  // Returns true if an agent can travel from one point to another
   def canTravelFrom(start: Point, to: Point): Boolean = {
     polygons.foreach { polygon =>
       if (polygon.lineIntersects(start, to)) return false
@@ -22,7 +26,8 @@ class Grid(polygons: List[Polygon], startPoint: Point, goalPoint: Point) {
     polygons.flatMap { polygon => polygon.points }.::(goalPoint)
   }
 
-  // Gets the neighbors of the start point
+  // Gets the neighbors of the start point, which are the points that are accessible in a straight line without crossing
+  // through a polygon
   def getNeighbors(startPoint: Point): List[Point] = {
     neighborMap.get(startPoint) match {
       case None =>
@@ -38,7 +43,7 @@ class Grid(polygons: List[Polygon], startPoint: Point, goalPoint: Point) {
 
   }
 
-  // Outputs the code that will plot the grid in matlab
+  // Outputs the code that will plot the polygons in matlab
   def toMatlab: String = {
     val s = polygons.foldLeft("fill(") {(s: String, polygon: Polygon) =>
       s + polygon.toMatlab +","
@@ -47,7 +52,8 @@ class Grid(polygons: List[Polygon], startPoint: Point, goalPoint: Point) {
     s.substring(0, s.length - 1) +");hold on;"
   }
 
-  // Checks all polygons to make sure that the point is not in the polygon, but it is okay if it is a vertex
+  // Checks all polygons to make sure that the point is not in the polygon, but it is okay if it is a vertex of a
+  // polygon
   def isInAPolygon(point: Point): Boolean = {
     polygons.foreach { polygon =>
       if (polygon.contains(point) && !polygon.points.contains(point)) return true
@@ -56,6 +62,7 @@ class Grid(polygons: List[Polygon], startPoint: Point, goalPoint: Point) {
     false
   }
 
+  // Stats helpers below
   def startTimer(): Unit ={
     stats.startTimer()
   }

@@ -1,3 +1,6 @@
+/*
+ * Simple point class that implements equals and hashCode for easy comparison in search code
+ */
 class Point(val x: Double, val y: Double) {
   override def toString: String = s"new Point($x,$y)"
 

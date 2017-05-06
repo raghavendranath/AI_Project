@@ -1,4 +1,6 @@
-
+/*
+ * Contains all of the definitions for the tests, which are then called by the algorithm's test class
+ */
 object TestUtility {
   def SimpleTest1: Grid = new Grid(List(
     new Polygon(List(new Point(2,1), new Point(3,1), new Point(3,2), new Point(2,2))),

@@ -1,4 +1,7 @@
 object Main {
+  /*
+   * Helper to generate
+   */
   def main(args: Array[String]): Unit = {
     val demoGrids = 1 to 10 map { _ =>
       GridUtility.randomGrid(5, new Point(20,20))
@@ -10,7 +13,6 @@ object Main {
       println(GridUtility.toMatlab(neighbors))
       println()
       println(s"val grid = $grid")
-      println("val expectedNeighbors = "+ GridUtility.createPointList(neighbors))
       println()
       println()
     }
