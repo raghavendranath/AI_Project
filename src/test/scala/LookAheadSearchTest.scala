@@ -105,13 +105,8 @@ class LookAheadSearchTest extends FunSpec {
     helper(TestUtility.LargeTest6, expectedPath)
   }
 
-  registerTest("Very Large lookahead search") {
-    val expectedPath = List(new Point(100.0,100.0), new Point(383.0,0.0), new Point(794.0,0.0), new Point(426.0,232.0), new Point(761.0,268.0), new Point(806.0,251.0), new Point(604.0,429.0), new Point(792.0,235.0), new Point(771.0,220.0), new Point(608.0,268.0), new Point(498.0,101.0), new Point(670.0,357.0), new Point(610.0,347.0), new Point(783.0,310.0), new Point(611.0,407.0), new Point(696.0,423.0), new Point(699.0,400.0), new Point(715.0,387.0), new Point(732.0,381.0), new Point(689.0,241.0), new Point(377.0,287.0), new Point(267.0,550.0), new Point(234.0,368.0), new Point(204.0,291.0), new Point(338.0,554.0), new Point(240.0,446.0), new Point(193.0,491.0), new Point(364.0,557.0), new Point(429.0,522.0), new Point(535.0,663.0), new Point(571.0,861.0), new Point(795.0,619.0), new Point(798.0,547.0), new Point(700.0,520.0))
-    helper(TestUtility.VeryLargeTest1, expectedPath)
-  }
-
-  registerTest("Very Large lookahead search 2") {
-    val expectedPath = List()
-    helper(TestUtility.VeryLargeTest2, expectedPath)
+  registerTest("large lookahead search 7") {
+    val expectedPath = List(new Point(0.0,0.0), new Point(4.0,60.0), new Point(32.0,49.0), new Point(62.0,99.0), new Point(75.0,92.0))
+    helper(TestUtility.LargeTest7, expectedPath)
   }
 }

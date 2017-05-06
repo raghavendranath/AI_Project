@@ -1,6 +1,9 @@
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
+/*
+ * Provides the base search algorithm for Greedy Search. To use, extend GreedySearchBase and implement the heuristic definition
+ */
 abstract class GreedySearchBase {
   def search(grid: Grid): List[Point] = {
     val empty = new Point(Double.PositiveInfinity,Double.PositiveInfinity)
@@ -37,12 +40,16 @@ abstract class GreedySearchBase {
         }
       }
     }
+
     // should not reach
     grid.stopTimer()
     grid.addNodeExpanded(closed.length)
     filter(closed)
   }
 
+  /*
+   * Filters out all of the backtracked points that were visited
+   */
   def filter(points: ArrayBuffer[GreedySearchNode]): List[Point] = {
     if (points.isEmpty) return List[Point]()
 
@@ -59,9 +66,16 @@ abstract class GreedySearchBase {
     finalPoints.reverse
   }
 
+  /*
+   * A definition that must be overridden to provide a heuristic for AStarBase
+   */
   def calculateHeuristic(startPoint: Point, grid: Grid): Double
 }
 
+/*
+ * A simple case class that contains all the needed data after visiting a vertex.
+ * Data includes the current point, previous point used to arrive at the current point, and a calculated heuristic value
+ */
 case class GreedySearchNode(var current: Point, var previous: Point, var h: Double) extends Ordered[GreedySearchNode] {
   override def compare(that: GreedySearchNode): Int = {
     that.h compare this.h

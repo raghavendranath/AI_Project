@@ -1,4 +1,9 @@
-
+/*
+ * Lookahead search allows to lookahead k number of moves before making a move
+ * For example,
+ *  k = 1 will look at the current nodes children
+ *  k = 2 will look at the current nodes grandchildren
+ */
 object LookAheadSearch {
   def search(grid: Grid,k: Int): List[Point] = {
     var currentPoint = grid.getStart
@@ -20,7 +25,7 @@ object LookAheadSearch {
         grid.addFinalPath(finalPath)
         return finalPath
       }
-      // We have a new move to make
+      // New move to make, the first point in this list is the current node we are already at, so choose the second
       currentPoint = possiblePath(1)
       finalPath = finalPath :+ currentPoint
     }
@@ -31,6 +36,10 @@ object LookAheadSearch {
     finalPath
   }
 
+  /*
+   * Recursively searches the current point's children until a specified depth and returns the child that
+   * is closest (Straight Line Distance) to the goal
+   */
   def findBestChild(depth: Int, current: Point, grid: Grid, traversedPoints: List[Point]): List[Point] = {
     if (depth == 0 || current == grid.getGoal) return List(current)
 

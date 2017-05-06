@@ -7,10 +7,8 @@
 
 ### Building
 ```
-cd AI_Project/
 sbt build
 ```
-
 ### Testing
 Run all tests
 ```
@@ -20,9 +18,11 @@ Run a specific test class
 ```
 test:test-only *{TestClassName}
 ```
-Test Class Names
-- AStarTest
-- GreedySearchTest
+Pick a TestClassName from below
+- AStarH1Test
+- AStarH2Test
+- GreedySearchH1Test
+- GreedySearchH2Test
 - GridTest
 - GridUtilityTest
 - LineTest

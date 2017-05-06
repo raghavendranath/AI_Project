@@ -103,13 +103,8 @@ class GreedySearchH1Test extends FunSpec{
     helper(TestUtility.LargeTest6, expectedPath)
   }
 
-  registerTest("Very Large greedy search") {
-    val expectedPath = List(new Point(100,100), new Point(383,0), new Point(794,0), new Point(565,164), new Point(461,317), new Point(434,455), new Point(446,511), new Point(549,681), new Point(649,742), new Point(795,619), new Point(724,501), new Point(700,520))
-    helper(TestUtility.VeryLargeTest1, expectedPath)
-  }
-
-  registerTest("Very Large greedy search 2") {
-    val expectedPath = List(new Point(550.0,400.0), new Point(579.0,358.0), new Point(642.0,332.0), new Point(446.0,378.0), new Point(593.0,52.0), new Point(703.0,9.0), new Point(749.0,29.0), new Point(776.0,844.0), new Point(793.0,887.0), new Point(837.0,977.0), new Point(900.0,900.0))
-    helper(TestUtility.VeryLargeTest2, expectedPath)
+  registerTest("Large greedy search 7") {
+    val expectedPath = List(new Point(0.0,0.0), new Point(17.0,54.0), new Point(55.0,74.0), new Point(60.0,95.0), new Point(75.0,92.0))
+    helper(TestUtility.LargeTest7, expectedPath)
   }
 }

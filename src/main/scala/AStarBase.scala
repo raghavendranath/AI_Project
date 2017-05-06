@@ -4,7 +4,9 @@
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
-
+/*
+ * Provides the base search algorithm for A*. To use, extend AStarBase and implement the heuristic definition
+ */
 abstract class AStarBase {
   def search(grid: Grid): List[Point] = {
     val empty = new Point(Double.PositiveInfinity,Double.PositiveInfinity)
@@ -24,6 +26,8 @@ abstract class AStarBase {
         grid.addNodeExpanded(closed.length)
         return List()
       }
+
+      // Set the current node to be explored to be the one that is 'closest' to the goal as defined by the heuristic
       val current = open.dequeue()
       closed.append(current)
       if(current.current == goal){
@@ -50,12 +54,16 @@ abstract class AStarBase {
         }
       }
     }
+
     // Should not reach
     grid.stopTimer()
     grid.addNodeExpanded(closed.length)
     filter(closed)
   }
 
+  /*
+   * Filters out all of the backtracked points that were visited
+   */
   def filter(points: ArrayBuffer[AStarNode]): List[Point] = {
     if (points.isEmpty) return List[Point]()
 
@@ -72,9 +80,17 @@ abstract class AStarBase {
     finalPoints.reverse
   }
 
+  /*
+   * A definition that must be overridden to provide a heuristic for AStarBase
+   */
   def calculateHeuristic(startPoint: Point, grid: Grid): Double
 }
 
+/*
+ * A simple case class that contains all the needed data after visiting a vertex.
+ * Data includes the current point, previous point used to arrive at the current point, actual distance traveled, the
+ * estimated cost to goal, and the final heuristic
+ */
 case class AStarNode(var current: Point, var previous: Point, var g: Double, var h: Double, var f: Double) extends Ordered[AStarNode] {
   override def compare(that: AStarNode): Int = {
     that.f compare this.f
